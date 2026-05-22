@@ -22,9 +22,17 @@ app.use(
     credentials: true,
   }),
 );
-
+app.get("/", (_req, res) => {
+  res.json({
+    status: "ok",
+    message: "API is running 🚀",
+  });
+});
 app.get("/health", (_req, res) => {
-  res.status(200).json({ status: "ok" });
+  res.status(200).json({
+    status: "ok",
+    uptime: process.uptime(),
+  });
 });
 
 app.use("/api/auth", authRoutes);
