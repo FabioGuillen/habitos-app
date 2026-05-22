@@ -1,0 +1,132 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum GoalType {
+  COUNT
+  MONEY
+  DAYS
+  CUSTOM
+}
+
+model User {
+  id            String         @id @default(uuid())
+  name          String
+  email         String         @unique
+  password      String
+  avatar        String?
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+
+  habits        Habit[]
+  notes         DailyNote[]
+  moods         MoodEntry[]
+  goals         Goal[]
+  tokens        RefreshToken[]
+}
+
+model Habit {
+  id            String         @id @default(uuid())
+  title         String
+  color         String?
+  icon          String?
+  active        Boolean        @default(true)
+
+  month         Int
+  year          Int
+
+  createdAt     DateTime       @default(now())
+
+  userId        String
+  user          User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  logs          HabitLog[]
+}
+
+model HabitLog {
+  id            String         @id @default(uuid())
+
+  day           Int
+  month         Int
+  year          Int
+
+  completed     Boolean        @default(false)
+
+  createdAt     DateTime       @default(now())
+
+  habitId       String
+  habit         Habit          @relation(fields: [habitId], references: [id], onDelete: Cascade)
+
+  @@unique([habitId, day, month, year])
+}
+
+model DailyNote {
+  id            String         @id @default(uuid())
+
+  day           Int
+  month         Int
+  year          Int
+
+  note          String
+
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+
+  userId        String
+  user          User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, day, month, year])
+}
+
+model MoodEntry {
+  id            String         @id @default(uuid())
+
+  day           Int
+  month         Int
+  year          Int
+
+  mood          Int
+  energy        Int?
+
+  createdAt     DateTime       @default(now())
+
+  userId        String
+  user          User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, day, month, year])
+}
+
+model Goal {
+  id            String         @id @default(uuid())
+
+  title         String
+  type          GoalType       @default(COUNT)
+
+  targetValue   Float
+  currentValue  Float          @default(0)
+
+  completed     Boolean        @default(false)
+
+  month         Int
+  year          Int
+
+  createdAt     DateTime       @default(now())
+
+  userId        String
+  user          User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model RefreshToken {
+  id            String         @id @default(uuid())
+
+  token         String         @unique
+  expiresAt     DateTime
+  createdAt     DateTime       @default(now())
+
+  userId        String
+  user          User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
