@@ -1,7 +1,8 @@
+import "dotenv/config";
 import axios from "axios";
 
 const axiosInstance = axios.create({
-  baseURL: "http://localhost:8000/api",
+  baseURL: import.meta.env.VITE_API_URL + "/api",
 });
 
 axiosInstance.interceptors.request.use((config) => {
@@ -24,7 +25,7 @@ axiosInstance.interceptors.response.use(
     }
 
     return Promise.reject(error);
-  }
+  },
 );
 
 export default axiosInstance;
