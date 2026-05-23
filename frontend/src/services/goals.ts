@@ -1,3 +1,4 @@
+import type { GoalType } from "../types/goals";
 import axios from "./axios";
 interface PayloadGoal {
   title: string;
@@ -17,7 +18,7 @@ export const getGoals = async (month: number, year: number) =>
 export const createGoal = async (data: {
   title: string;
   targetValue: number;
-  type: string;
+  type: GoalType;
 }) => {
   const res = await axios.post("/goals", {
     ...data,
