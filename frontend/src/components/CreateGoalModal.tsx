@@ -3,6 +3,7 @@ import { createGoal, updagteGoalNote } from "../services/goals";
 import { useGoalsStore } from "../store/goals.store";
 import toast from "react-hot-toast";
 import { useState } from "react";
+type GoalType = "COUNT" | "MONEY" | "DAYS" | "CUSTOM";
 
 interface Props {
   open: boolean;
@@ -26,32 +27,47 @@ const CreateGoalModal = ({ open, onClose, onCreated }: Props) => {
     });
   };
   const handleSave = async () => {
-    const { targetValue, title } = goalForm;
+    const { targetValue, title, type } = goalForm;
+
+    if (!title.trim()) {
+      return toast.error("Ingrese un título");
+    }
+
+    if (targetValue <= 0) {
+      return toast.error("Ingrese un objetivo válido");
+    }
+
     setLoading(true);
+
     try {
+      const payload = {
+        title: title.trim(),
+        targetValue,
+        type,
+      };
+
       if (editGoal) {
-        const res = await updagteGoalNote(editGoal.id, {
-          title,
-          targetValue,
-          type: "number",
-        });
+        const res = await updagteGoalNote(editGoal.id, payload);
+
         updateGoal(res.data);
       } else {
-        await createGoal({
-          title,
-          targetValue,
-          type: "COUNT",
-        });
+        await createGoal(payload);
       }
 
       onCreated();
       onClose();
-      setGoalForm({ title: "", targetValue: 0 });
+
+      setGoalForm({
+        title: "",
+        targetValue: 0,
+        type: "COUNT",
+      });
+
       toast.success(
         `Goal ${editGoal ? "actualizado" : "creado"} correctamente`,
       );
     } catch (error: any) {
-      console.log(error.response?.error?.message || error.message);
+      toast.error(error.response?.data?.message || "Ocurrió un error");
     } finally {
       setLoading(false);
     }
@@ -76,7 +92,22 @@ const CreateGoalModal = ({ open, onClose, onCreated }: Props) => {
             placeholder="Ej: Ir al gym"
             className="w-full bg-[#0B0F14] border border-[#1F2937] rounded-xl px-4 py-3"
           />
-
+          <select
+            name="type"
+            value={goalForm.type}
+            onChange={(e) =>
+              setGoalForm({
+                ...goalForm,
+                type: e.target.value as GoalType,
+              })
+            }
+            className="w-full bg-[#0B0F14] border border-[#1F2937] rounded-xl px-4 py-3"
+          >
+            <option value="COUNT">Cantidad</option>
+            <option value="MONEY">Dinero</option>
+            <option value="DAYS">Días</option>
+            <option value="CUSTOM">Personalizado</option>
+          </select>
           <input
             type="number"
             value={goalForm.targetValue}

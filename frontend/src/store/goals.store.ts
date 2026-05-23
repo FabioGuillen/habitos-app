@@ -1,10 +1,11 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware"; // 1. Importa el middleware
 import type { GoalsDate } from "../types/goals";
-
+type GoalType = "COUNT" | "MONEY" | "DAYS" | "CUSTOM";
 interface GoalForm {
   title: string;
   targetValue: number;
+  type: GoalType;
 }
 
 interface GoalsState {
@@ -24,7 +25,7 @@ export const useGoalsStore = create<GoalsState>()(
     (set) => ({
       goals: [],
       editGoal: null,
-      goalForm: { title: "", targetValue: 10 },
+      goalForm: { title: "", targetValue: 10, type: "COUNT" },
 
       setGoals: (goals) => set({ goals }),
       setEditGoal: (editGoal) => set({ editGoal }),
@@ -39,7 +40,7 @@ export const useGoalsStore = create<GoalsState>()(
         set({
           goals: [],
           editGoal: null,
-          goalForm: { title: "", targetValue: 10 },
+          goalForm: { title: "", targetValue: 0, type: "COUNT" },
         }),
     }),
     {
