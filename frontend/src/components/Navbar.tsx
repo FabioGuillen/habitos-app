@@ -34,7 +34,7 @@ const Navbar = () => {
   }, []);
 
   return (
-    <header className="fixed md:relative top-1 z-40 mb-5">
+    <header className="sticky md:relative top-1 z-40 mb-5">
       <div className="relative rounded-[32px] border border-[#1F2937] bg-[#0F1722]/75 backdrop-blur-2xl px-4 md:px-7 py-4 shadow-[0_20px_60px_rgba(0,0,0,0.35)]">
         <div className="absolute top-0 right-0 w-72 h-72 bg-[#22C55E]/5 blur-3xl rounded-full pointer-events-none" />
 
