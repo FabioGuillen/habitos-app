@@ -22,6 +22,7 @@ app.use(
     credentials: true,
   }),
 );
+
 app.get("/", (_req, res) => {
   res.json({
     status: "ok",
