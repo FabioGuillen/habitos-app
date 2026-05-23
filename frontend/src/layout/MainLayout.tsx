@@ -12,7 +12,7 @@ const MainLayout = () => {
         <Sidebar open={openMenu} setOpen={setOpenMenu} />
       </aside>
 
-      <main className="flex-1 overflow-y-auto px-4 pb-4 md:pb-4 md:px-8 md:pt-2 pt-2 custom-scrollbar">
+      <main className="flex-1 overflow-y-auto px-2 pb-2 md:pb-4 md:px-8 md:pt-2 pt-2 custom-scrollbar">
         <div className="max-w-7xl mx-auto">
           <div className="md:hidden block">
             <Sidebar open={openMenu} setOpen={setOpenMenu} />
