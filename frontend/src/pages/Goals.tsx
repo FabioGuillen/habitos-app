@@ -12,7 +12,7 @@ import {
 import { motion } from "framer-motion";
 import { getGoals, addProgress, deleteGoal } from "../services/goals";
 import toast from "react-hot-toast";
-import type { GoalsDate } from "../types/goals";
+import type { GoalForm, GoalsDate } from "../types/goals";
 import { useGoalsStore } from "../store/goals.store";
 import CreateGoalModal from "../components/CreateGoalModal";
 import GoalsGrid from "../components/GoalsGrid";
@@ -73,10 +73,9 @@ const Goals = () => {
     if (amount === -1 && currentValue <= 0) return;
 
     try {
-      setLoadingGoalId(id); // Esto ya es suficiente para mostrar un spinner pequeño en la card
+      setLoadingGoalId(id);
       await addProgress(id, amount);
 
-      // Llamamos a load sin activar el loading global (load(false))
       await load(false);
     } catch (error) {
       toast.error("No se pudo actualizar el progreso");
@@ -123,7 +122,11 @@ const Goals = () => {
   const handleEditGoal = (goal: GoalsDate) => {
     setEditGoal(goal);
 
-    setGoalForm({ title: goal.title, targetValue: goal.targetValue });
+    setGoalForm({
+      title: goal.title,
+      targetValue: goal.targetValue,
+      type: goal.type,
+    });
     setOpen(true);
   };
   const handleOpenDeleteModal = (id: string) => {

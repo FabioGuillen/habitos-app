@@ -6,7 +6,13 @@ export interface GoalsDate {
   month: number;
   targetValue: number;
   title: string;
-  type: "COUNT" | string;
+  type: GoalType;
   userId: string;
   year: number;
+}
+export type GoalType = "COUNT" | "MONEY" | "DAYS" | "CUSTOM";
+export interface GoalForm {
+  title: string;
+  targetValue: number;
+  type: GoalType;
 }

@@ -1,12 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware"; // 1. Importa el middleware
-import type { GoalsDate } from "../types/goals";
-type GoalType = "COUNT" | "MONEY" | "DAYS" | "CUSTOM";
-interface GoalForm {
-  title: string;
-  targetValue: number;
-  type: GoalType;
-}
+import type { GoalForm, GoalsDate } from "../types/goals";
 
 interface GoalsState {
   goals: GoalsDate[];
