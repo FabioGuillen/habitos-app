@@ -40,7 +40,7 @@ const CreateGoalModal = ({ open, onClose, onCreated }: Props) => {
         await createGoal({
           title,
           targetValue,
-          type: "number",
+          type: "COUNT",
         });
       }
 
