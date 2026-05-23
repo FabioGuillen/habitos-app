@@ -60,7 +60,7 @@ const Sidebar = ({ open, setOpen }: Props) => {
     <>
       {/* MOBILE BUTTON */}
       {!open && (
-        <div className="md:hidden fixed top-8 left-8 z-[999]">
+        <div className="md:hidden fixed top-8 left-8 z-40">
           <button
             onClick={() => setOpen(true)}
             className="group relative overflow-hidden bg-[#111827]/90 backdrop-blur-xl border border-[#1F2937] hover:border-[#22C55E]/40 transition-all duration-300 p-3 rounded-2xl shadow-2xl shadow-black/30"
