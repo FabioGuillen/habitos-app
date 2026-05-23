@@ -12,7 +12,7 @@ import {
 import { motion } from "framer-motion";
 import { getGoals, addProgress, deleteGoal } from "../services/goals";
 import toast from "react-hot-toast";
-import type { GoalForm, GoalsDate } from "../types/goals";
+import type { GoalsDate } from "../types/goals";
 import { useGoalsStore } from "../store/goals.store";
 import CreateGoalModal from "../components/CreateGoalModal";
 import GoalsGrid from "../components/GoalsGrid";
