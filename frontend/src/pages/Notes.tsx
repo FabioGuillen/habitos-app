@@ -143,7 +143,7 @@ const Notes = () => {
             </p>
           </div>
 
-          <div className="flex flex-row items-center justify-between gap-6">
+          <div className="flex md:flex-row flex-col items-center justify-between gap-6">
             <div
               className="
       flex
@@ -227,6 +227,7 @@ const Notes = () => {
               className="
           group
           rounded-2xl
+          
           bg-gradient-to-r from-[#22C55E] to-[#16A34A]
           px-7 py-4
           font-bold text-black
@@ -236,7 +237,7 @@ const Notes = () => {
           transition-all"
             >
               <Plus size={18} className="transition group-hover:rotate-90" />
-              <span className="hidden md:inline">Nueva Nota</span>
+              <span className="">Nueva Nota</span>
             </button>
           </div>
         </div>

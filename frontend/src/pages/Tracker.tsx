@@ -148,7 +148,7 @@ const Tracker = () => {
             </p>
           </div>
 
-          <div className="flex flex-row justify-between items-center gap-4">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <div
               className="
       flex
@@ -252,7 +252,7 @@ const Tracker = () => {
                 aria-label="Crear nuevo hábito"
               />
 
-              <span className="hidden md:inline">Nuevo Hábito</span>
+              <span className="">Nuevo Hábito</span>
             </button>
           </div>
         </div>

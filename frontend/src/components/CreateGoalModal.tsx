@@ -2,6 +2,7 @@ import { X } from "lucide-react";
 import { createGoal, updagteGoalNote } from "../services/goals";
 import { useGoalsStore } from "../store/goals.store";
 import toast from "react-hot-toast";
+import { useState } from "react";
 
 interface Props {
   open: boolean;
@@ -11,7 +12,7 @@ interface Props {
 
 const CreateGoalModal = ({ open, onClose, onCreated }: Props) => {
   const { goalForm, setGoalForm, editGoal, updateGoal } = useGoalsStore();
-
+  const [loading, setLoading] = useState(false);
   if (!open) return null;
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.currentTarget;
@@ -26,6 +27,7 @@ const CreateGoalModal = ({ open, onClose, onCreated }: Props) => {
   };
   const handleSave = async () => {
     const { targetValue, title } = goalForm;
+    setLoading(true);
     try {
       if (editGoal) {
         const res = await updagteGoalNote(editGoal.id, {
@@ -50,6 +52,8 @@ const CreateGoalModal = ({ open, onClose, onCreated }: Props) => {
       );
     } catch (error: any) {
       console.log(error.response?.error?.message || error.message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -85,7 +89,11 @@ const CreateGoalModal = ({ open, onClose, onCreated }: Props) => {
             onClick={handleSave}
             className="w-full bg-[#22C55E] text-black py-3 rounded-xl font-semibold"
           >
-            {editGoal ? "Guardar cambios" : "Crear meta"}
+            {loading
+              ? "Guardando..."
+              : editGoal
+                ? "Guardar cambios"
+                : "Crear meta"}
           </button>
         </div>
       </div>

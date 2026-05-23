@@ -2,6 +2,7 @@ import { X } from "lucide-react";
 import { createHabit, updateMyHabit } from "../services/habits";
 import toast from "react-hot-toast";
 import { useHabitsStore } from "../store/habits.store";
+import { useState } from "react";
 
 interface Props {
   onClose: () => void;
@@ -22,10 +23,10 @@ const colors = [
 const CreateHabitModal = ({ onClose, onCreated }: Props) => {
   const { open, editHabit, updateHabit, color, setColor, setTitle, title } =
     useHabitsStore();
-
+  const [loading, setLoading] = useState(false);
   const handleSubmit = async () => {
     if (!title.trim()) return;
-
+    setLoading(true);
     try {
       if (editHabit) {
         console.log(editHabit);
@@ -53,6 +54,8 @@ const CreateHabitModal = ({ onClose, onCreated }: Props) => {
       onClose();
     } catch (error) {
       console.error("Error al crear el hábito:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -108,7 +111,11 @@ const CreateHabitModal = ({ onClose, onCreated }: Props) => {
             onClick={handleSubmit}
             className="w-full bg-[#22C55E] hover:bg-[#16A34A] transition-colors text-black font-semibold py-3 rounded-xl"
           >
-            {editHabit ? "Editar hábito" : "Guardar hábito"}
+            {loading
+              ? "Guardando..."
+              : editHabit
+                ? "Editar hábito"
+                : "Guardar hábito"}
           </button>
         </div>
       </div>

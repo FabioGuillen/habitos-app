@@ -193,7 +193,7 @@ const Goals = () => {
             </p>
           </div>
 
-          <div className="flex flex-row gap-4 justify-between items-center">
+          <div className="flex flex-col md:flex-row gap-4 justify-between items-center">
             <div
               className="
       flex
@@ -299,7 +299,7 @@ const Goals = () => {
                 className="group-hover:rotate-90 transition"
                 aria-label="Crear nueva meta"
               />
-              <span className="hidden md:inline">Nueva Meta</span>
+              <span className="">Nueva Meta</span>
             </button>
           </div>
         </div>
