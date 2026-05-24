@@ -23,6 +23,14 @@ const GoalsGrid = ({
   setOpen,
   handleOpenDeleteModal,
 }: GoalsGridProps) => {
+  const gradients = [
+    "from-[#22C55E]/10 to-transparent",
+    "from-blue-500/10 to-transparent",
+    "from-purple-500/10 to-transparent",
+    "from-orange-500/10 to-transparent",
+  ];
+
+  const gradient = gradients[goals.length % gradients.length];
   return (
     <div>
       {goals.length > 0 ? (
@@ -47,6 +55,10 @@ const GoalsGrid = ({
                     : "bg-[#111827] border-[#1F2937] hover:border-gray-700"
                 }`}
               >
+                <div
+                  className={`absolute inset-0 bg-gradient-to-br ${gradient}`}
+                />
+
                 <div className="absolute top-6 right-6 transition-opacity duration-300 flex items-center gap-1">
                   <div className="flex gap-3">
                     {" "}
