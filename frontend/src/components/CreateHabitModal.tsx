@@ -29,8 +29,6 @@ const CreateHabitModal = ({ onClose, onCreated }: Props) => {
     setLoading(true);
     try {
       if (editHabit) {
-        console.log(editHabit);
-
         const res = await updateMyHabit(editHabit.id, {
           title,
           color,
