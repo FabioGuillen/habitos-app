@@ -13,7 +13,7 @@ import { useNavbarStore } from "../store/navbar.store";
 const Navbar = () => {
   const user = useAuthStore((state) => state.user);
   const { open, setOpen } = useNavbarStore();
-  const [openProfile, setopenProfile] = useState(false);
+  const [openProfile, setOpenProfile] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   const initial = user?.name?.charAt(0).toUpperCase() || "U";
@@ -24,7 +24,7 @@ const Navbar = () => {
         dropdownRef.current &&
         !dropdownRef.current.contains(e.target as Node)
       ) {
-        setopenProfile(false);
+        setOpenProfile(false);
       }
     };
 
@@ -64,7 +64,7 @@ const Navbar = () => {
           <div className="flex items-center gap-4">
             <div className="relative" ref={dropdownRef}>
               <button
-                onClick={() => setopenProfile(!openProfile)}
+                onClick={() => setOpenProfile(!openProfile)}
                 className={`flex items-center gap-3 rounded-2xl border px-3 py-2 transition-all duration-300 ${
                   openProfile
                     ? "border-[#22C55E] bg-[#0B0F14]"
@@ -96,7 +96,7 @@ const Navbar = () => {
               </button>
 
               <AnimatePresence>
-                {open && (
+                {openProfile && (
                   <motion.div
                     initial={{
                       opacity: 0,
