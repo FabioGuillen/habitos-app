@@ -4,7 +4,6 @@ import {
   NotebookPen,
   Target,
   BarChart3,
-  Menu,
   X,
   Sparkles,
   ChevronRight,
@@ -13,6 +12,7 @@ import {
 import { Link, useLocation } from "react-router-dom";
 
 import { motion, AnimatePresence } from "framer-motion";
+import { useNavbarStore } from "../store/navbar.store";
 
 const links = [
   {
@@ -47,31 +47,11 @@ const links = [
   },
 ];
 
-interface Props {
-  open: boolean;
-
-  setOpen: (open: boolean) => void;
-}
-
-const Sidebar = ({ open, setOpen }: Props) => {
+const Sidebar = () => {
   const { pathname } = useLocation();
-
+  const { open, setOpen } = useNavbarStore();
   return (
     <>
-      {/* MOBILE BUTTON */}
-      {!open && (
-        <div className="md:hidden sticky  top-8 left-8 z-40">
-          <button
-            onClick={() => setOpen(true)}
-            className="group relative overflow-hidden bg-[#111827]/90 backdrop-blur-xl border border-[#1F2937] hover:border-[#22C55E]/40 transition-all duration-300 p-3 rounded-2xl shadow-2xl shadow-black/30"
-          >
-            <div className="absolute inset-0 bg-[#22C55E]/5 opacity-0 group-hover:opacity-100 transition-opacity" />
-
-            <Menu size={24} className="relative z-10" />
-          </button>
-        </div>
-      )}
-
       {/* OVERLAY */}
       <AnimatePresence>
         {open && (

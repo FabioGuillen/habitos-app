@@ -1,4 +1,4 @@
-import { ChevronDown, LogOut, Settings, User } from "lucide-react";
+import { ChevronDown, LogOut, Menu, Settings, User } from "lucide-react";
 
 import { Link } from "react-router-dom";
 
@@ -8,12 +8,12 @@ import { useEffect, useRef, useState } from "react";
 
 import { useAuthStore } from "../store/auth.store";
 import { logoutUser } from "../utils/logoutUser";
+import { useNavbarStore } from "../store/navbar.store";
 
 const Navbar = () => {
   const user = useAuthStore((state) => state.user);
-
-  const [open, setOpen] = useState(false);
-
+  const { open, setOpen } = useNavbarStore();
+  const [openProfile, setopenProfile] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   const initial = user?.name?.charAt(0).toUpperCase() || "U";
@@ -24,7 +24,7 @@ const Navbar = () => {
         dropdownRef.current &&
         !dropdownRef.current.contains(e.target as Node)
       ) {
-        setOpen(false);
+        setopenProfile(false);
       }
     };
 
@@ -38,7 +38,7 @@ const Navbar = () => {
       <div className="relative rounded-[32px] border border-[#1F2937] bg-[#0F1722]/75 backdrop-blur-2xl px-4 md:px-7 py-4 shadow-[0_20px_60px_rgba(0,0,0,0.35)]">
         <div className="absolute top-0 right-0 w-72 h-72 bg-[#22C55E]/5 blur-3xl rounded-full pointer-events-none" />
 
-        <div className="relative z-10 flex items-center md:justify-between justify-end">
+        <div className="relative z-10 flex items-center justify-between">
           <div className="hidden md:block">
             <h2 className="text-2xl font-bold tracking-tight">
               Bienvenido de nuevo
@@ -49,12 +49,24 @@ const Navbar = () => {
               <span className="text-white font-medium ml-1">{user?.name}</span>
             </p>
           </div>
+          {!open && (
+            <div className="md:hidden ">
+              <button
+                onClick={() => setOpen(true)}
+                className="group relative overflow-hidden bg-[#111827]/90 backdrop-blur-xl border border-[#1F2937] hover:border-[#22C55E]/40 transition-all duration-300 p-3 rounded-2xl shadow-2xl shadow-black/30"
+              >
+                <div className="absolute inset-0 bg-[#22C55E]/5 opacity-0 group-hover:opacity-100 transition-opacity" />
+
+                <Menu size={24} className="relative z-10" />
+              </button>
+            </div>
+          )}
           <div className="flex items-center gap-4">
             <div className="relative" ref={dropdownRef}>
               <button
-                onClick={() => setOpen(!open)}
+                onClick={() => setopenProfile(!openProfile)}
                 className={`flex items-center gap-3 rounded-2xl border px-3 py-2 transition-all duration-300 ${
-                  open
+                  openProfile
                     ? "border-[#22C55E] bg-[#0B0F14]"
                     : "border-[#1F2937] bg-[#0B0F14] hover:border-[#22C55E]"
                 }`}
@@ -79,7 +91,7 @@ const Navbar = () => {
 
                 <ChevronDown
                   size={18}
-                  className={`transition ${open ? "rotate-180" : ""}`}
+                  className={`transition ${openProfile ? "rotate-180" : ""}`}
                 />
               </button>
 
