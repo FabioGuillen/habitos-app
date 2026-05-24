@@ -51,11 +51,7 @@ const Navbar = () => {
           </div>
           <div className="md:hidden ">
             <button
-              onClick={() => {
-                console.log("click");
-
-                setOpen(true);
-              }}
+              onClick={() => setOpen(true)}
               className="group relative overflow-hidden bg-[#111827]/90 backdrop-blur-xl border border-[#1F2937] hover:border-[#22C55E]/40 transition-all duration-300 p-3 rounded-2xl shadow-2xl shadow-black/30"
             >
               <div className="absolute inset-0 bg-[#22C55E]/5 opacity-0 group-hover:opacity-100 transition-opacity" />
