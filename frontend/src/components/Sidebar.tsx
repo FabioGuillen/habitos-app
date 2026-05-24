@@ -51,7 +51,6 @@ const Sidebar = () => {
   const { pathname } = useLocation();
   const { open, setOpen } = useNavbarStore();
 
-  console.log("Sidebar:", open);
   return (
     <>
       {/* OVERLAY */}
