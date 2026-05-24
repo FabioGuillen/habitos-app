@@ -49,18 +49,16 @@ const Navbar = () => {
               <span className="text-white font-medium ml-1">{user?.name}</span>
             </p>
           </div>
-          {!open && (
-            <div className="md:hidden ">
-              <button
-                onClick={() => setOpen(true)}
-                className="group relative overflow-hidden bg-[#111827]/90 backdrop-blur-xl border border-[#1F2937] hover:border-[#22C55E]/40 transition-all duration-300 p-3 rounded-2xl shadow-2xl shadow-black/30"
-              >
-                <div className="absolute inset-0 bg-[#22C55E]/5 opacity-0 group-hover:opacity-100 transition-opacity" />
+          <div className="md:hidden ">
+            <button
+              onClick={() => setOpen(true)}
+              className="group relative overflow-hidden bg-[#111827]/90 backdrop-blur-xl border border-[#1F2937] hover:border-[#22C55E]/40 transition-all duration-300 p-3 rounded-2xl shadow-2xl shadow-black/30"
+            >
+              <div className="absolute inset-0 bg-[#22C55E]/5 opacity-0 group-hover:opacity-100 transition-opacity" />
 
-                <Menu size={24} className="relative z-10" />
-              </button>
-            </div>
-          )}
+              <Menu size={24} className="relative z-10" />
+            </button>
+          </div>
           <div className="flex items-center gap-4">
             <div className="relative" ref={dropdownRef}>
               <button
