@@ -34,7 +34,7 @@ const Navbar = () => {
   }, []);
 
   return (
-    <header className="sticky md:relative top-1 z-40 mb-5">
+    <header className="sticky md:relative top-1 z-30 mb-5">
       <div className="relative rounded-[32px] border border-[#1F2937] bg-[#0F1722]/75 backdrop-blur-2xl px-4 md:px-7 py-4 shadow-[0_20px_60px_rgba(0,0,0,0.35)]">
         <div className="absolute top-0 right-0 w-72 h-72 bg-[#22C55E]/5 blur-3xl rounded-full pointer-events-none" />
 
@@ -51,7 +51,11 @@ const Navbar = () => {
           </div>
           <div className="md:hidden ">
             <button
-              onClick={() => setOpen(true)}
+              onClick={() => {
+                console.log("click");
+
+                setOpen(true);
+              }}
               className="group relative overflow-hidden bg-[#111827]/90 backdrop-blur-xl border border-[#1F2937] hover:border-[#22C55E]/40 transition-all duration-300 p-3 rounded-2xl shadow-2xl shadow-black/30"
             >
               <div className="absolute inset-0 bg-[#22C55E]/5 opacity-0 group-hover:opacity-100 transition-opacity" />

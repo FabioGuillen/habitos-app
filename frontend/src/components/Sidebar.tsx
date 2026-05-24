@@ -50,6 +50,8 @@ const links = [
 const Sidebar = () => {
   const { pathname } = useLocation();
   const { open, setOpen } = useNavbarStore();
+
+  console.log("Sidebar:", open);
   return (
     <>
       {/* OVERLAY */}
@@ -65,7 +67,7 @@ const Sidebar = () => {
             exit={{
               opacity: 0,
             }}
-            className="fixed inset-0 bg-black/70 backdrop-blur-sm z-40 md:hidden"
+            className="fixed inset-0 bg-black/70 backdrop-blur-sm z-[998] md:hidden"
             onClick={() => setOpen(false)}
           />
         )}
