@@ -12,7 +12,7 @@ import { useNavbarStore } from "../store/navbar.store";
 
 const Navbar = () => {
   const user = useAuthStore((state) => state.user);
-  const { open, setOpen } = useNavbarStore();
+  const { setOpen } = useNavbarStore();
   const [openProfile, setOpenProfile] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
